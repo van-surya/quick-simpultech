@@ -41,7 +41,7 @@ export function Quick() {
                         onClick={resetComponent}
                         className={`w-14 h-14 bg-primary rounded-full ${activeComponent ? 'hidden' : ''}`}
                         icon={images.lightning}
-                        iconClassName="w-12 h-12"
+                        iconClassName="!w-12 !h-12"
                     />
                 </div>
             )}

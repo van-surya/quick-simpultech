@@ -38,7 +38,9 @@ export const Inbox = () => {
                             <Input className="px-6 border h-8 border-gray-900 rounded-md" placeholder="Search"
                                 icon={images.searchdark} inputClassName="p-0 text-gray-900 placeholder-gray-900 font-bold text-sm"
                                 iconClassName="order-2 w-4 h-4" />
-                            <ListInbox openDetailInbox={openDetailInbox} idInbox={setIdInbox} />
+                            <div className="h-[540px] mt-2 overflow-y-auto">
+                                <ListInbox openDetailInbox={openDetailInbox} idInbox={setIdInbox} />
+                            </div>
                         </Modal>
                     )}
                     {showDetailInbox && <DetailInbox idInbox={idInbox} showListInbox={showListInbox} handleButtonQuick={handleButtonQuick} />}

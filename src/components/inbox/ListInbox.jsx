@@ -19,7 +19,7 @@ export const ListInbox = ({ openDetailInbox }) => {
                 return (
                     <div key={index} onClick={() => openDetailInbox(list.id)}>
                         {index !== 0 && <hr className='border-t-gray-900' />}
-                        <div className='w-full flex flex-row py-3'>
+                        <div className='w-full flex flex-row py-4'>
                             {previousChatDetail?.image ? (
                                 <div className="w-20 h-12 me-2">
                                     <div className="relative w-20 me-2">

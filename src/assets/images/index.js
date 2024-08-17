@@ -25,6 +25,7 @@ import searchdark from './search_dark.svg'
 import person_dark from './person_dark.svg'
 import close_dark from './close_dark.svg'
 import arrow_back_dark from './arrow_back_dark.svg'
+import arrow_down_dark from './arrow_down_dark.svg'
 
 
 const images = {
@@ -53,7 +54,8 @@ const images = {
     searchdark,
     person_dark,
     close_dark,
-    arrow_back_dark
+    arrow_back_dark,
+    arrow_down_dark
 }
 
 export default images;
