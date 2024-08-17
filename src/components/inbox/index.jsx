@@ -39,7 +39,7 @@ export const Inbox = () => {
                                 icon={images.searchdark} inputClassName="p-0 text-gray-900 placeholder-gray-900 font-bold text-sm"
                                 iconClassName="order-2 w-4 h-4" />
                             <div className="h-[540px] mt-2 overflow-y-auto">
-                                <ListInbox openDetailInbox={openDetailInbox} idInbox={setIdInbox} />
+                                <ListInbox openDetailInbox={openDetailInbox} idInbox={setIdInbox} /> 
                             </div>
                         </Modal>
                     )}
