@@ -34,7 +34,7 @@ export const NavTask = () => {
                     iconClassName="w-3 h-3"
                 />
                 {isDropdownOpen && (
-                    <div className="absolute top-12 w-48 left-[50%] translate-x-[-50%] bg-[#FFF] border border-gray-900 rounded-md">
+                    <div className="absolute top-12 z-10 w-48 left-[50%] translate-x-[-50%] bg-[#FFF] border border-gray-900 rounded-md">
                         <Button
                             className="font-bold text-sm w-full p-1 border-b border-gray-900"
                             label="Personal Errands"

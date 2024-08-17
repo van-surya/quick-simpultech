@@ -24,7 +24,7 @@ export const Task = () => {
                 <div className="flex flex-col">
                     <Modal className="px-6 py-4">
                         <NavTask />
-                        <div className="h-[540px] mt-2 overflow-y-auto">
+                        <div className="h-[520px] mt-2 overflow-y-auto">
                             <ListTask />
                         </div>
                     </Modal>

@@ -16,7 +16,7 @@ import pen from './pen.svg'
 import person from './person.svg'
 import question_answer from './question_answer.svg'
 import question_answer_purple from './question_answer_purple.svg'
-import scheduleschedule from './schedule.svg'
+import schedule from './schedule.svg'
 import search from './search.svg'
 import star_outline from './star_outline.svg'
 import list from './list.svg'
@@ -26,11 +26,13 @@ import person_dark from './person_dark.svg'
 import close_dark from './close_dark.svg'
 import arrow_back_dark from './arrow_back_dark.svg'
 import arrow_down_dark from './arrow_down_dark.svg'
+import calendar from './calendar.svg'
 
 
 const images = {
     add,
-    arrow_black, arrow_down,
+    arrow_black,
+    arrow_down,
     bookmarks,
     card_travel,
     check_box,
@@ -46,7 +48,7 @@ const images = {
     person,
     question_answer,
     question_answer_purple,
-    scheduleschedule,
+    schedule,
     search,
     star_outline,
     list,
@@ -55,7 +57,8 @@ const images = {
     person_dark,
     close_dark,
     arrow_back_dark,
-    arrow_down_dark
+    arrow_down_dark,
+    calendar
 }
 
 export default images;
