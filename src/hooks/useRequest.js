@@ -1,7 +1,5 @@
-// import axios from 'axios'
-// import { _TEMP_API, apiURLQuery } from 'config/app'
-
-export const apiURLQuery = 'https://json-quickmessage.vercel.app'
+import axios from 'axios'
+export const apiURLQuery = process.env.REACT_APP_API_URL;
 
 export const getData = async (URL) => {
     const response = await fetch(apiURLQuery + URL);
@@ -11,67 +9,33 @@ export const getData = async (URL) => {
     return response.json();
 };
 
-// export const getData = async (URL, config) => {
-//     const respond = config
-//         ? await axios
-//             .post(apiURLQuery + URL, config)
-//             .then((res) => res)
-//             .catch((error) => error.response)
-//         : await axios
-//             .get(apiURLQuery + URL)
-//             .then((res) => res)
-//             .catch((error) => error.response)
-//     return respond.data
-// }
+export const postData = async (URL, data) => {
+    const response = await fetch(apiURLQuery + URL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
+};
 
-// export const putData = async (URL, config) => {
-//     const respond = await axios
-//         .put(apiURLQuery + URL, config)
-//         .then((res) => res)
-//         .catch((error) => error.response)
-//     return respond.data
-// }
+export const putData = async (URL, data) => {
+    try {
+        const response = await axios.put(`${apiURLQuery}${URL}`, data);
+        return response.data;
+    } catch (error) {
+        console.error('Error updating data:', error);
+        throw error;
+    }
+};
 
-// export const deleteData = async (URL, config) => {
-//     const respond = config
-//         ? await axios
-//             .delete(apiURLQuery + URL, config)
-//             .then((res) => res)
-//             .catch((error) => error.response)
-//         : await axios
-//             .delete(apiURLQuery + URL)
-//             .then((res) => res)
-//             .catch((error) => error.response)
-//     return respond.data
-// }
-
-// export const patchData = async (URL, config) => {
-//     const respond = await axios
-//         .patch(apiURLQuery + URL, config)
-//         .then((res) => res)
-//         .catch((error) => error.response)
-
-//     return respond.data
-// }
-
-// export const putformData = async (URL, formData) => {
-//     const respond = await axios
-//         .put(apiURLQuery + URL, formData)
-//         .then((res) => res)
-//         .catch((error) => error.response)
-
-//     return respond.data
-// }
-
-// export const _tempGetData = async (URL, config) => {
-//     const respond = config
-//         ? await axios
-//             .post(_TEMP_API + URL, config)
-//             .then((res) => res)
-//             .catch((error) => error.response)
-//         : await axios
-//             .get(_TEMP_API + URL)
-//             .then((res) => res)
-//             .catch((error) => error.response)
-//     return respond.data
-// }
+export const deleteData = async (URL, data) => {
+    try {
+        const response = await axios.delete(`${apiURLQuery}${URL}`, data);
+        return response.data;
+    } catch (error) {
+        console.error('Error deleting data:', error);
+        throw error;
+    }
+};

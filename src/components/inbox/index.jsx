@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button, Quick, Task, ListInbox, Modal, Input, DetailInbox } from '../';
 import images from '../../assets/images';
 
@@ -7,7 +7,7 @@ export const Inbox = () => {
     const [showModal, setShowModal] = useState(true);
     const [showTask, setShowTask] = useState(false);
     const [showDetailInbox, setShowDetailInbox] = useState(false);
-    const [idInbox, setIdInbox] = useState('');
+    const [idInbox, setIdInbox] = useState(''); 
 
     const handleButtonQuick = () => {
         setShowButtonQuick(true);
@@ -28,11 +28,23 @@ export const Inbox = () => {
         setShowDetailInbox(false);
     };
 
+    const modalRef = useRef(null);
+
+    const handleClickOutside = (event) => {
+        if (modalRef.current && !modalRef.current.contains(event.target)) {
+            handleButtonQuick();
+        }
+    };
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
     return (
         <>
             {showTask && <Task />}
             {showModal && (
-                <div className="flex flex-col">
+                <div className="flex flex-col" ref={modalRef}>
                     {!showDetailInbox && (
                         <Modal className="px-6 py-4">
                             <Input className="px-6 border h-8 border-gray-900 rounded-md" placeholder="Search"

@@ -2,11 +2,28 @@ import React, { useState } from 'react';
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addMonths, subMonths, eachDayOfInterval, isToday } from 'date-fns'; // Menggunakan library date-fns
 import images from '../../assets/images';
 import { Button } from '../';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { putData } from '../../hooks/useRequest';
 
-export const InputDatepicker = () => {
-    const [selectedDate, setSelectedDate] = useState(null);
+export const InputDatepicker = ({ description, listId, category, title, date, status }) => {
+    const [selectedDate, setSelectedDate] = useState(date);
     const [isOpen, setIsOpen] = useState(false);
     const [calendarDate, setCalendarDate] = useState(new Date());
+    const queryClient = useQueryClient();
+
+    const { mutate: updateTaskDate } = useMutation({
+        mutationFn: () => putData(`/tasks/${listId}`, {
+            description,
+            category,
+            title,
+            date: format(selectedDate, 'yyyy-MM-dd'), // Format tanggal sesuai kebutuhan API
+            status
+        }),
+        onSuccess: () => {
+            queryClient.invalidateQueries(['tasks']);
+            console.log('Date updated successfully');
+        }
+    });
 
     const handleDateClick = (date) => {
         setSelectedDate(date);
@@ -28,6 +45,10 @@ export const InputDatepicker = () => {
 
     const handleNextMonth = () => {
         setCalendarDate(addMonths(calendarDate, 1));
+    };
+
+    const onSubmit = () => {
+        updateTaskDate();
     };
 
     const renderCalendar = () => {
@@ -61,7 +82,11 @@ export const InputDatepicker = () => {
                     {days.map(day => (
                         <div
                             key={day.toString()}
-                            className={`cursor-pointer p-1 rounded-full ${isToday(day) ? 'border border-gray-900' : ''} hover:bg-primary hover:text-[#FFF]`}
+                            className={`cursor-pointer p-1 rounded-full 
+                                } ${selectedDate && format(day, 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd')
+                                    ? 'border-2 border-blue-500 hover:bg-primary hover:text-neutral-50'
+                                    : 'hover:bg-primary hover:text-[#FFF]'
+                                }`}
                             onClick={() => handleDateClick(day)}
                         >
                             {format(day, 'd')}
@@ -74,6 +99,7 @@ export const InputDatepicker = () => {
 
     return (
         <div className="relative inline-flex items-center">
+            <Button onClick={onSubmit} icon={images.schedule} className="w-6 h-6 me-2" />
             <input
                 type="text"
                 value={selectedDate ? format(selectedDate, 'dd/MM/yyyy') : ''}

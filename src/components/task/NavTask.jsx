@@ -2,12 +2,19 @@ import React, { useState, useEffect, useRef } from 'react';
 import images from "../../assets/images";
 import { Button } from "../Button";
 
-export const NavTask = () => {
+export const NavTask = ({ onCategorySelect }) => {  
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState('My Task');  
     const dropdownRef = useRef(null);
 
     const showDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleOptionSelect = (option) => {
+        setSelectedOption(option);
+        onCategorySelect(option);
+        setIsDropdownOpen(false);
     };
 
     useEffect(() => {
@@ -30,7 +37,7 @@ export const NavTask = () => {
                     onClick={showDropdown}
                     className="font-bold text-base border border-gray-900 rounded-md p-2"
                     iconRight={images.arrow_down_dark}
-                    label="My Task"
+                    label={selectedOption}  
                     iconClassName="w-3 h-3"
                 />
                 {isDropdownOpen && (
@@ -38,10 +45,12 @@ export const NavTask = () => {
                         <Button
                             className="font-bold text-sm w-full p-1 border-b border-gray-900"
                             label="Personal Errands"
+                            onClick={() => handleOptionSelect('Personal Errands')}  
                         />
                         <Button
                             className="font-bold text-sm w-full p-1"
                             label="Urgent To-Do"
+                            onClick={() => handleOptionSelect('Urgent To-Do')}  
                         />
                     </div>
                 )}

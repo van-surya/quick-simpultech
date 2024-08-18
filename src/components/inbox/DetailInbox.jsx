@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Button, Modal, Input } from '..';
+import { Button, Modal, InputInbox } from '..';
 import images from '../../assets/images';
 import { Spinner } from '../';
 import { useQuery } from '@tanstack/react-query';
@@ -128,11 +128,7 @@ export const DetailInbox = ({ idInbox, showListInbox, handleButtonQuick }) => {
                     </>
                 )}
             </div>
-            <div className="px-6 my-auto flex flex-row gap-2 items-center">
-                <Input placeholder="Type a new message"
-                    inputClassName="rounded-md p-2 border !border-gray-900 text-[#333333] placeholder-[#333333] font-regular text-sm" />
-                <Button label="Send" className="bg-primary text-base rounded-md font-bold text-[#FFF] py-2 px-4" />
-            </div>
+            <InputInbox idInbox={idInbox} />
         </Modal>
     );
 };
