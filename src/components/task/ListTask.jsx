@@ -27,6 +27,7 @@ export const ListTask = ({ selectedCategory }) => {
     const { mutate: removeTask } = useMutation({
         mutationFn: (taskId) => deleteData(`/tasks/${taskId}`),
         onSuccess: () => {
+            setShowDelete(null); 
             refetch();
         }
     });
@@ -122,7 +123,7 @@ export const ListTask = ({ selectedCategory }) => {
                                         />
                                         <Button
                                             onClick={() => handleRemove(list.id)}
-                                            className={`absolute right-0 top-6 bg-white p-1 text-sm border border-gray-900 rounded-md text-red ${showDelete === index ? 'block' : 'hidden'}`}
+                                                className={`absolute z-10 right-0 top-6 bg-white p-2 font-bold text-sm border border-gray-900 rounded-md text-red ${showDelete === index ? 'block' : 'hidden'}`}
                                             label="DELETE"
                                         />
                                     </div>

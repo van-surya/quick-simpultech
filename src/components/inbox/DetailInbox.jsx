@@ -97,16 +97,20 @@ export const DetailInbox = ({ idInbox, showListInbox, handleButtonQuick }) => {
                                                 : textClass}`}>
                                                 {detail.name}
                                             </p>
-                                            <div className="w-[80%] flex flex-row gap-2 relative">
-                                                <Button
-                                                    icon={images.more_horiz_dark}
-                                                    onClick={() => handleOptionChat(detail.id)}
-                                                    className="w-4 h-4"
-                                                />
-                                                {isCollapseOpen && (
-                                                    <div ref={collapseRef} className="absolute t-2 bg-[#FFF] rounded-sm border border-gray-200">
-                                                        <Button className="text-primary p-1 px-2 w-full text-sm font-bold border-b border-gray-200" label="Edit" />
-                                                        <Button className="text-red p-1 px-2 w-full text-sm font-bold" label="Delete" />
+                                            <div className="w-[80%] flex flex-row gap-2">
+                                                {detail.name == 'You' && (
+                                                    <div className='relative'>
+                                                        <Button
+                                                            icon={images.more_horiz_dark}
+                                                            onClick={() => handleOptionChat(detail.id)}
+                                                            className="w-4 h-4"
+                                                        />
+                                                        {isCollapseOpen && (
+                                                            <div ref={collapseRef} className="absolute t-2 bg-[#FFF] rounded-md border border-gray-200">
+                                                                <Button className="text-primary p-1 px-2 w-full text-sm font-bold border-b border-gray-200" label="Edit" />
+                                                                <Button className="text-red p-1 px-2 w-full text-sm font-bold" label="Delete" />
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 )}
                                                 <div className={`p-2 rounded-md w-full ${detail.name === 'You'
@@ -119,6 +123,21 @@ export const DetailInbox = ({ idInbox, showListInbox, handleButtonQuick }) => {
                                                         {detail.time}
                                                     </p>
                                                 </div>
+                                                {detail.name != 'You' && (
+                                                    <div className='relative'>
+                                                        <Button
+                                                            icon={images.more_horiz_dark}
+                                                            onClick={() => handleOptionChat(detail.id)}
+                                                            className="w-4 h-4"
+                                                        />
+                                                        {isCollapseOpen && (
+                                                            <div ref={collapseRef} className="absolute t-2 bg-[#FFF] rounded-md border border-gray-200">
+                                                                <Button className="text-primary p-1 px-2 w-full text-sm font-bold border-b border-gray-200" label="Share" />
+                                                                <Button className="text-primary p-1 px-2 w-full text-sm font-bold" label="Reply" />
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )} 
                                             </div>
                                         </div>
                                     );

@@ -25,7 +25,7 @@ export const Textarea = ({ description, listId, category, title, date, status })
             <div className="flex flex-row gap-2 mt-2 w-full">
                 <Button onClick={onSubmit} icon={images.pen} className="w-4 h-4 mt-2" />
                 <textarea
-                    className='w-[80%] p-2 mb-2 bg-[#FFF]'
+                    className='w-[80%] p-2 mb-2 bg-[#FFF] rounded-md border border-transparent focus:outline-none focus:border-gray-900'
                     rows={desc ? 4 : 1}
                     value={desc}
                     onChange={(e) => setDesc(e.target.value)}

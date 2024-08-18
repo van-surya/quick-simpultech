@@ -63,7 +63,7 @@ export const InputDatepicker = ({ description, listId, category, title, date, st
                 <div className="flex items-center justify-between mb-2">
                     <Button
                         onClick={handlePrevMonth}
-                        className="text-gray-600 hover:text-gray-800 rotate-90 w-4 h-4"
+                        className="text-gray-600 hover:text-gray-800 rotate-90 w-3 h-3"
                         icon={images.arrow_down_dark}
                     />
                     <p className='font-bold'>
@@ -71,7 +71,7 @@ export const InputDatepicker = ({ description, listId, category, title, date, st
                     </p>
                     <Button
                         onClick={handleNextMonth}
-                        className="text-gray-600 hover:text-gray-800 -rotate-90 w-4 h-4"
+                        className="text-gray-600 hover:text-gray-800 -rotate-90 w-3 h-3"
                         icon={images.arrow_down_dark}
                     />
                 </div>
@@ -106,7 +106,7 @@ export const InputDatepicker = ({ description, listId, category, title, date, st
                 onClick={handleToggleCalendar}
                 onChange={handleDateChange}
                 placeholder="Select Date"
-                className="border p-2 rounded-md pe-2 ring-0"
+                className="border p-2 rounded-md pe-2 focus:outline-none"
                 readOnly
             />
             <img
