@@ -7,7 +7,8 @@ export const Inbox = () => {
     const [showModal, setShowModal] = useState(true);
     const [showTask, setShowTask] = useState(false);
     const [showDetailInbox, setShowDetailInbox] = useState(false);
-    const [idInbox, setIdInbox] = useState(''); 
+    const [idInbox, setIdInbox] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');  
 
     const handleButtonQuick = () => {
         setShowButtonQuick(true);
@@ -28,6 +29,12 @@ export const Inbox = () => {
         setShowDetailInbox(false);
     };
 
+    const handleSearch = (event) => {
+        if (event.value) {
+            setSearchQuery(event.value);
+        }
+    };
+
     const modalRef = useRef(null);
 
     const handleClickOutside = (event) => {
@@ -35,6 +42,7 @@ export const Inbox = () => {
             handleButtonQuick();
         }
     };
+
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -47,11 +55,20 @@ export const Inbox = () => {
                 <div className="flex flex-col" ref={modalRef}>
                     {!showDetailInbox && (
                         <Modal className="px-6 py-4">
-                            <Input className="px-6 border h-8 border-gray-900 rounded-md" placeholder="Search"
-                                icon={images.searchdark} inputClassName="p-0 text-gray-900 placeholder-gray-900 font-bold text-sm"
-                                iconClassName="order-2 w-4 h-4" />
+                            <Input
+                                onChange={handleSearch}
+                                className="px-6 border h-8 border-gray-900 rounded-md"
+                                placeholder="Search"
+                                icon={images.searchdark}
+                                inputClassName="p-0 text-gray-900 placeholder-gray-900 font-bold text-sm"
+                                iconClassName="order-2 w-4 h-4"
+                            />
                             <div className="h-[540px] mt-2 overflow-y-auto">
-                                <ListInbox openDetailInbox={openDetailInbox} idInbox={setIdInbox} /> 
+                                <ListInbox
+                                    openDetailInbox={openDetailInbox}
+                                    idInbox={setIdInbox}
+                                    searchQuery={searchQuery}
+                                />
                             </div>
                         </Modal>
                     )}

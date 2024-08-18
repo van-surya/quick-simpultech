@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addMonths, subMonths, eachDayOfInterval, isToday } from 'date-fns'; // Menggunakan library date-fns
+import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addMonths, subMonths, eachDayOfInterval } from 'date-fns';
 import images from '../../assets/images';
 import { Button } from '../';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -16,7 +16,7 @@ export const InputDatepicker = ({ description, listId, category, title, date, st
             description,
             category,
             title,
-            date: format(selectedDate, 'yyyy-MM-dd'), // Format tanggal sesuai kebutuhan API
+            date: format(selectedDate, 'yyyy-MM-dd'),  
             status
         }),
         onSuccess: () => {

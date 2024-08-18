@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getData } from '../../hooks/useRequest';
 import { Spinner } from '../Spinner';
 
-export const ListInbox = ({ openDetailInbox }) => {  
+export const ListInbox = ({ openDetailInbox, searchQuery }) => {
     const [inboxData, setInboxData] = useState([]);
 
     const { data, isLoading } = useQuery({
@@ -18,6 +18,17 @@ export const ListInbox = ({ openDetailInbox }) => {
         }
     }, [data]);
 
+    const filteredInboxData = searchQuery
+        ? inboxData.filter(list =>
+            list.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            list.chat?.some(chat =>
+                chat.detail?.some(detail =>
+                    detail.message.toLowerCase().includes(searchQuery.toLowerCase())
+                )
+            )
+        )
+        : inboxData;
+
     return (
         <>
             {isLoading ? (
@@ -26,7 +37,7 @@ export const ListInbox = ({ openDetailInbox }) => {
                 </div>
             ) : (
                 <>
-                    {inboxData.map((list, index) => {
+                        {filteredInboxData.map((list, index) => {
                         const latestChat = list.chat?.slice(-1)[0] || {};
                         const latestChatDetail = latestChat.detail?.slice(-1)[0] || {};
                         const previousChatDetail = latestChat.detail?.slice(-2, -1)[0] || {};
@@ -91,6 +102,5 @@ export const ListInbox = ({ openDetailInbox }) => {
                     </>
             )}
         </>
-
     );
 };

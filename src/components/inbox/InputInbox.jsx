@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Input } from '..';
-import { postData } from '../../hooks/useRequest';
-
-export const InputInbox = ({ idInbox }) => {
+export const InputInbox = ({ }) => {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
 

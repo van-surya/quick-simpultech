@@ -37,7 +37,7 @@ export const Task = () => {
                 <div className="flex flex-col" ref={modalRef}>
                     <Modal className="px-6 py-4">
                         <NavTask onCategorySelect={setSelectedCategory} /> 
-                        <div className="h-[520px] mt-2 overflow-y-auto">
+                        <div className="h-[560px] mt-2 overflow-y-auto">
                             <ListTask selectedCategory={selectedCategory} /> 
                         </div>
                     </Modal>

@@ -38,7 +38,7 @@ export const NavTask = ({ onCategorySelect }) => {
                     className="font-bold text-base border border-gray-900 rounded-md p-2"
                     iconRight={images.arrow_down_dark}
                     label={selectedOption}  
-                    iconClassName="w-3 h-3"
+                    iconClassName="!w-3 !h-3"
                 />
                 {isDropdownOpen && (
                     <div className="absolute top-12 z-10 w-48 left-[50%] translate-x-[-50%] bg-[#FFF] border border-gray-900 rounded-md">

@@ -69,7 +69,7 @@ export const DetailInbox = ({ idInbox, showListInbox, handleButtonQuick }) => {
                 </div>
                 <Button icon={images.close_dark} onClick={handleButtonQuick} className="ms-auto w-4 h-4" />
             </div>
-            <div className='h-[460px] overflow-y-auto mt-auto px-6'>
+            <div className='h-[480px] overflow-y-auto mt-auto px-6'>
                 {isLoading ? (
                     <div className="flex justify-center items-center h-full">
                         <Spinner label="Loading Chats..." />

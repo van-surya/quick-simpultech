@@ -4,10 +4,11 @@ import { Button, Spinner, Textarea } from '../';
 import { InputDatepicker } from './InputDatepicker';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { getData, putData, deleteData } from '../../hooks/useRequest';
+import { differenceInDays, parseISO } from 'date-fns';  
 
 export const ListTask = ({ selectedCategory }) => {
     const [taskData, setTaskData] = useState([]);
-    const [openDropdowns, setOpenDropdowns] = useState([]); // Ubah state untuk mendukung banyak dropdown
+    const [openDropdowns, setOpenDropdowns] = useState([]);
     const [showDelete, setShowDelete] = useState(null);
     const containerRef = useRef(null);
 
@@ -40,7 +41,7 @@ export const ListTask = ({ selectedCategory }) => {
         const handleClickOutside = (event) => {
             if (containerRef.current && !containerRef.current.contains(event.target)) {
                 setShowDelete(null);
-                setOpenDropdowns([]); // Menyembunyikan semua dropdown jika klik di luar
+                setOpenDropdowns([]);
             }
         };
 
@@ -71,6 +72,12 @@ export const ListTask = ({ selectedCategory }) => {
         removeTask(taskId);
     };
 
+    const calculateDaysLeft = (date) => {
+        const taskDate = parseISO(date);
+        const today = new Date();
+        return differenceInDays(today, taskDate);
+    };
+
     const filteredTasks = selectedCategory === 'My Task' ? taskData : taskData.filter(task => task.category === selectedCategory);
 
     return (
@@ -92,12 +99,15 @@ export const ListTask = ({ selectedCategory }) => {
                                         icon={list?.status ? images.check_box : images.check_box_outline_blank}
                                     />
                                 </div>
-                                <div className="w-2/3">
+                                    <div className="w-3/5">
                                     <p className={`text-gray-900 font-bold text-base ${list?.status ? 'line-through' : ''}`}>
                                         {list?.title}
                                     </p>
                                 </div>
                                 <div className="gap-2 flex flex-row ms-auto items-center">
+                                        {calculateDaysLeft(list?.date) !== 0 && (
+                                            <p className='text-red font-regular text-sm'>{`${calculateDaysLeft(list?.date)} Days Left`}</p>
+                                        )}
                                     <p className='text-gray-900 text-sm font-regular'>{list?.date}</p>
                                     <Button
                                         onClick={() => handleDropdown(index)}
