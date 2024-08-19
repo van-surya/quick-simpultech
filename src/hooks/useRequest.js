@@ -11,7 +11,9 @@ export const getData = async (URL) => {
 
 export const postData = async (URL, data) => {
     const response = await fetch(apiURLQuery + URL, {
-        method: 'POST',
+        method: 'POST', headers: {
+            'Content-Type': 'application/json',
+        },
         body: JSON.stringify(data),
     });
     if (!response.ok) {

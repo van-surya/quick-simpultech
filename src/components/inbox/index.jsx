@@ -8,6 +8,7 @@ export const Inbox = () => {
     const [showTask, setShowTask] = useState(false);
     const [showDetailInbox, setShowDetailInbox] = useState(false);
     const [idInbox, setIdInbox] = useState('');
+    const [titleInbox, setTitleInbox] = useState('');
     const [searchQuery, setSearchQuery] = useState('');  
 
     const handleButtonQuick = () => {
@@ -20,9 +21,10 @@ export const Inbox = () => {
         setShowTask(true);
     };
 
-    const openDetailInbox = (id) => {
+    const openDetailInbox = (id, title) => {
         setShowDetailInbox(true);
         setIdInbox(id);
+        setTitleInbox(title);
     };
 
     const showListInbox = () => {
@@ -67,12 +69,13 @@ export const Inbox = () => {
                                 <ListInbox
                                     openDetailInbox={openDetailInbox}
                                     idInbox={setIdInbox}
+                                    titleInbox={setTitleInbox}
                                     searchQuery={searchQuery}
                                 />
                             </div>
                         </Modal>
                     )}
-                    {showDetailInbox && <DetailInbox idInbox={idInbox} showListInbox={showListInbox} handleButtonQuick={handleButtonQuick} />}
+                    {showDetailInbox && <DetailInbox titleInbox={titleInbox} idInbox={idInbox} showListInbox={showListInbox} handleButtonQuick={handleButtonQuick} />}
                     <div className="ms-auto flex flex-row gap-2 items-center">
                         <Button
                             onClick={showTaskHandler}
