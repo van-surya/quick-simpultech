@@ -12,9 +12,7 @@ export const InputInbox = ({ idInbox, dataReplay, setDataReplay }) => {
     const handleChange = ({ value }) => {
         setMessage(value);
         setError('');
-    };
-
-
+    }; 
 
     const onSubmit = async () => {
         if (message.trim() === '') {
@@ -35,6 +33,7 @@ export const InputInbox = ({ idInbox, dataReplay, setDataReplay }) => {
         try {
             await postData('/detail_inbox', dataToSend);
             queryClient.invalidateQueries('detail_inbox');
+            setDataReplay(null)
             setMessage('');
         } catch (error) {
             console.error('Error posting data:', error);

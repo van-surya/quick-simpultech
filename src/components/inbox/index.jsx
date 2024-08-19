@@ -1,15 +1,19 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button, Quick, Task, ListInbox, Modal, Input, DetailInbox } from '../';
 import images from '../../assets/images';
+import { useMutation } from '@tanstack/react-query';
+import { putData } from '../../hooks/useRequest';
 
 export const Inbox = () => {
     const [showButtonQuick, setShowButtonQuick] = useState(false);
     const [showModal, setShowModal] = useState(true);
     const [showTask, setShowTask] = useState(false);
     const [showDetailInbox, setShowDetailInbox] = useState(false);
+    const [inboxStatusData, setInboxStatusData] = useState(false);
     const [idInbox, setIdInbox] = useState('');
     const [titleInbox, setTitleInbox] = useState('');
-    const [searchQuery, setSearchQuery] = useState('');  
+    const [searchQuery, setSearchQuery] = useState(''); 
+    const modalRef = useRef(null);
 
     const handleButtonQuick = () => {
         setShowButtonQuick(true);
@@ -21,23 +25,31 @@ export const Inbox = () => {
         setShowTask(true);
     };
 
-    const openDetailInbox = (id, title) => {
+
+    const openDetailInbox = (id, title, participant, message, name, date, time) => {
         setShowDetailInbox(true);
         setIdInbox(id);
         setTitleInbox(title);
+        setInboxStatusData({ title, participant, message, name, date, time, status: false })
+
+        updateStatusInbox();
     };
+
+    const { mutate: updateStatusInbox } = useMutation({
+        mutationFn: () => putData(`/inbox/${idInbox}`, inboxStatusData),
+        onSuccess: () => {
+            console.log('Description updated successfully');
+        }
+    });
 
     const showListInbox = () => {
         setShowDetailInbox(false);
     };
 
     const handleSearch = (event) => {
-        if (event.value) {
-            setSearchQuery(event.value);
-        }
+        setSearchQuery(event.value);
     };
 
-    const modalRef = useRef(null);
 
     const handleClickOutside = (event) => {
         if (modalRef.current && !modalRef.current.contains(event.target)) {

@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import images from '../../assets/images';
-import { Button, Spinner, Textarea } from '../';
+import { Button, Spinner, Textarea, InputTag } from '../';
 import { InputDatepicker } from './InputDatepicker';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { getData, putData, deleteData } from '../../hooks/useRequest';
-import { differenceInDays, parseISO } from 'date-fns';  
+import { differenceInDays, parseISO } from 'date-fns';
 
 export const ListTask = ({ selectedCategory }) => {
     const [taskData, setTaskData] = useState([]);
@@ -27,7 +27,7 @@ export const ListTask = ({ selectedCategory }) => {
     const { mutate: removeTask } = useMutation({
         mutationFn: (taskId) => deleteData(`/tasks/${taskId}`),
         onSuccess: () => {
-            setShowDelete(null); 
+            setShowDelete(null);
             refetch();
         }
     });
@@ -100,7 +100,7 @@ export const ListTask = ({ selectedCategory }) => {
                                         icon={list?.status ? images.check_box : images.check_box_outline_blank}
                                     />
                                 </div>
-                                    <div className="w-3/5">
+                                    <div className="w-1/2 2xl:w-3/5">
                                     <p className={`text-gray-900 font-bold text-base ${list?.status ? 'line-through' : ''}`}>
                                         {list?.title}
                                     </p>
@@ -136,7 +136,8 @@ export const ListTask = ({ selectedCategory }) => {
                                         category={list.category}
                                         title={list.title}
                                         date={list.date}
-                                        status={list.status} />
+                                            status={list.status}
+                                            schedule={list.schedule} />
                                 </div>
                                 <Textarea
                                     description={list.description}
@@ -145,7 +146,16 @@ export const ListTask = ({ selectedCategory }) => {
                                     title={list.title}
                                     date={list.date}
                                     status={list.status}
+                                        schedule={list.schedule}
                                 />
+
+                                    <InputTag description={list.description}
+                                        listId={list.id}
+                                        schedule={list.schedule}
+                                        category={list.category}
+                                        title={list.title}
+                                        date={list.date}
+                                        status={list.status} />
                             </div>
                         </div>
                     ))}

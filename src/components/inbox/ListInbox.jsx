@@ -29,6 +29,11 @@ export const ListInbox = ({ openDetailInbox, searchQuery }) => {
         )
         : inboxData;
 
+    const truncateMessage = (message, maxLength) => {
+        if (!message) return '';
+        return message.length > maxLength ? `${message.substring(0, maxLength)}...` : message;
+    };
+
     return (
         <>
             {isLoading ? (
@@ -39,7 +44,7 @@ export const ListInbox = ({ openDetailInbox, searchQuery }) => {
                 <>
                         {filteredInboxData.map((list, index) => {
                         return (
-                            <div key={index} onClick={() => openDetailInbox(list.id, list.title)}>
+                            <div key={index} onClick={() => openDetailInbox(list.id, list.title, list.participant, list.message, list.name, list.date, list.time)}>
                                 {index !== 0 && <hr className='border-t-gray-900' />}
                                 <div className='w-full flex flex-row py-4'>
                                     {list?.participant >= 2 ? (
@@ -76,7 +81,7 @@ export const ListInbox = ({ openDetailInbox, searchQuery }) => {
                                             <p className='text-gray-900 font-bold text-sm'>{list.name} {list.name ? ':' : ''}</p>
                                         )}
                                         <div className="flex flex-row justify-between items-end">
-                                            <p className='text-gray-900 text-sm'>{list.message}</p>
+                                            <p className='text-gray-900 text-sm'>{truncateMessage(list.message, 76)}</p>
                                             {list?.unread && (
                                                 <div className="w-2 h-2 rounded-full bg-red"></div>
                                             )}

@@ -58,7 +58,7 @@ export const DetailInbox = ({ idInbox, titleInbox, showListInbox, handleButtonQu
 
     useEffect(() => {
         if (data) {
-            setInboxDetail(data);
+            setInboxDetail(data); 
         }
     }, [data]);
 
