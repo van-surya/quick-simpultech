@@ -4,6 +4,9 @@ module.exports = {
     "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js"
   ],
   theme: {
+    screens: {
+      '3xl': '1920px',
+    },
     extend: {
       colors: {
         gray: {
